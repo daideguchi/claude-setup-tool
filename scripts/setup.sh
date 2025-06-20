@@ -144,45 +144,9 @@ EOF
 if [[ "$WITH_AI_ORG" == "true" ]]; then
     print_info "AI組織設定を追加中..."
     
-    # AI組織設定用のディレクトリ作成
-    mkdir -p .cursor/ai-org
+    # AI組織設定のセットアップスクリプトを実行
+    "$PROJECT_ROOT/claude-setup-tool/ai-org/setup-ai-org.sh"
     
-    # AI組織設定ファイルの作成
-    cat > .cursor/ai-org/team-structure.md << EOF
-# AI組織構造
-
-## チーム構成
-- プロダクトマネージャー
-- テックリード
-- 開発者
-- QAエンジニア
-- DevOpsエンジニア
-
-## 役割と責任
-各役割の詳細な責任範囲を定義...
-
-## コミュニケーションフロー
-チーム間のコミュニケーション方法...
-EOF
-
-    cat > .cursor/ai-org/workflow.md << EOF
-# 開発ワークフロー
-
-## 開発プロセス
-1. 要件定義
-2. 設計
-3. 実装
-4. テスト
-5. レビュー
-6. デプロイ
-
-## ブランチ戦略
-- main: 本番環境
-- develop: 開発環境
-- feature/*: 機能開発
-- hotfix/*: 緊急修正
-EOF
-
     print_success "AI組織設定を追加しました"
 fi
 
