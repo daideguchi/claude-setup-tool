@@ -2,25 +2,54 @@
 
 ## ワンコマンド初期設定
 
-### 既存ディレクトリに適用
+### インタラクティブメニュー（推奨）
 ```bash
-# カレントディレクトリにClaude Code設定を適用
+# 選択メニューでセットアップ
 curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash
+```
 
-# または
-bash <(curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh)
+実行すると以下のメニューが表示されます：
+```
+🚀 Claude Setup Tool へようこそ！
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+セットアップモードを選択してください：
+
+1) 📝 基本設定のみ
+   - CLAUDE.md (ドキュメント更新システム)
+   - .cursor/rules/ (Next.js 14 + TypeScript規約)
+   - 基本的なプロジェクト構造
+
+2) 🧑‍💼 AI組織設定のみ
+   - プロジェクト分析システム
+   - 組織構成提案（3-8名体制）
+   - tmuxベースの並列処理
+
+3) 🎯 フル設定（基本 + AI組織）
+   - 上記すべての機能
+   - エンタープライズ対応
+
+4) ❌ キャンセル
+
+選択してください [1-4]:
+```
+
+### 非対話モード（自動化）
+```bash
+# 基本設定のみ
+curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --mode basic --non-interactive
+
+# AI組織設定のみ
+curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --mode ai-org --non-interactive
+
+# フル設定（基本 + AI組織）
+curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --mode full --non-interactive
 ```
 
 ### 新規プロジェクト作成
 ```bash
-# 新しいプロジェクトを作成して設定を適用
-curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --new-project "my-app"
-```
-
-### AI組織モードも含める場合
-```bash
-# 基本設定 + AI組織設定を一括適用
-curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --with-ai-org
+# 新しいプロジェクトを作成してフル設定
+curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --new-project "my-app" --mode full --non-interactive
 ```
 
 ## Claude Code組織モード設定
@@ -76,31 +105,37 @@ claude-org stop
 
 ## 利用シーン別コマンド
 
-### 個人開発者
+### 個人開発者・学習用
 ```bash
-# 基本設定のみ
-curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash
+# 基本設定のみ（推奨）
+curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --mode basic --non-interactive
 ```
 
 ### 小規模チーム（2-3人）
 ```bash
-# AI組織モード（軽量）
-curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --with-ai-org
-claude-org start --light
+# AI組織設定で軽量構成
+curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --mode ai-org --non-interactive
+claude-org start light
 ```
 
 ### 中規模チーム（4-6人）
 ```bash
-# AI組織モード（標準）
-curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --with-ai-org
-claude-org start
+# フル設定で標準構成
+curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --mode full --non-interactive
+claude-org start standard
 ```
 
 ### 大規模チーム（7人以上）
 ```bash
-# AI組織モード（フル）
-curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --with-ai-org
-claude-org start --full
+# フル設定で最大構成
+curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --mode full --non-interactive
+claude-org start full
+```
+
+### 既存プロジェクトにAI組織のみ追加
+```bash
+# 既存のClaude Codeプロジェクトに組織機能を追加
+curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --mode ai-org --non-interactive
 ```
 
 ## 高度な使用方法

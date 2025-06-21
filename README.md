@@ -12,14 +12,16 @@ Claude Codeプロジェクトの初期設定を自動化するツールです。
 
 ### ワンコマンド設定（推奨）
 ```bash
-# 既存ディレクトリに適用
+# インタラクティブメニューで選択
 curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash
 
-# 新規プロジェクト作成
-curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --new-project "my-app"
+# 非対話モード（自動化）
+curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --mode basic --non-interactive     # 基本設定のみ
+curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --mode ai-org --non-interactive   # AI組織設定のみ
+curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --mode full --non-interactive     # フル設定
 
-# AI組織モードも含める
-curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --with-ai-org
+# 新規プロジェクト作成
+curl -fsSL https://raw.githubusercontent.com/daideguchi/claude-setup-tool/main/scripts/quick-setup.sh | bash -s -- --new-project "my-app" --mode full --non-interactive
 ```
 
 ### ローカルからの実行
